@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <section class="wrapper">
+        <div class="top">RealTime</div>
+        <div class="bottom" aria-hidden="true">RealTime</div>
+    </section>
+    <section class="wrapper">
+        <p  id="realDate"></p>
+        <p id="realTime"></p>
+    </section>
+</body>
+<script>
+    function displayTime() {
+        let data = new Date();
+        let realTime = data.toLocaleTimeString();
+        document.getElementById('realTime').textContent = realTime;
+        if (realTime === '00:00:00') displayDate();
+    }
+
+    function displayDate() {
+        let data = new Date();
+        let realDate = data.toDateString();
+        let parts = realDate.split(" "); // ["Sat", "Dec", "14", "2024"]
+        //per tradurre in italiano fare mappe(oggetti) con {nomeEng: "nomeIta",....}
+        let formattedDate = `${parts[0]} ${parts[2]} ${parts[1]} ${parts[3]}`;
+        document.getElementById('realDate').textContent = formattedDate;
+    }
+
+    displayDate();
+    displayTime();
+    const createClock = setInterval(displayTime, 1000);
+
+</script>
+
+</html>
