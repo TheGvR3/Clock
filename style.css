@@ -2,73 +2,217 @@
 
 * {
     box-sizing: border-box;
-    background-color: var(--background-color);
-    color: var(--text-color);
 }
 
 :root {
-  --background-color: black;
-  --text-color: hsl(0, 0%, 100%);
+    --background-color: black;
+    --text-color: hsl(0, 0%, 100%);
+    --accent-color: #4a90e2;
 }
 
 body {
-  margin: 0;
+    margin: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: "Poppins", sans-serif;
 }
 
 .wrapper {
-  display: grid;
-  place-content: center;
-  min-height: 30vh;
-  font-family: "Oswald", sans-serif;
-  font-size: clamp(1rem, 1rem + 5vw, 5rem);
-  font-weight: 900;
-  text-transform: uppercase;
+    display: grid;
+    place-content: center;
+    text-align: center;
 }
 
-.wrapper > div {
-  grid-area: 1/1/-1/-1;
+.wrapper.title {
+    min-height: 20vh;
+    font-size: clamp(1rem, 1rem + 5vw, 5rem);
+    font-weight: 900;
+    text-transform: uppercase;
 }
 
-.wrapper #realTime{
-  text-align: center;
+.title > div {
+    grid-area: 1/1/-1/-1;
 }
 
 .top {
-  clip-path: polygon(0% 0%, 100% 0%, 100% 48%, 0% 58%);
+    clip-path: polygon(0% 0%, 100% 0%, 100% 48%, 0% 58%);
 }
 
 .bottom {
-  clip-path: polygon(0% 60%, 100% 50%, 100% 100%, 0% 100%);
-  color: transparent;
-  background: -webkit-linear-gradient(177deg, black 53%, var(--text-color) 65%);
-  background: linear-gradient(177deg, black 53%, var(--text-color) 65%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  transform: translateX(-0.02em);
-}  
-
-.wrapper:nth-child(2) {
-  margin: auto;
-  position: relative;
-  padding: 40px;
-  border: 10px solid var(--text-color);
-  border-radius: 30%;
-  width: 400px;
-  height: 400px;
-  display: flex;
-  flex-direction: column; /* Impostiamo la disposizione verticale */
-  justify-content: space-around;
-  align-items: center;
-  text-align: center;
+    clip-path: polygon(0% 60%, 100% 50%, 100% 100%, 0% 100%);
+    color: transparent;
+    background: -webkit-linear-gradient(177deg, black 53%, var(--text-color) 65%);
+    background: linear-gradient(177deg, black 53%, var(--text-color) 65%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    transform: translateX(-0.02em);
 }
 
-.wrapper #realDate {
-  margin: 0;
-  font-size: 1.5rem; /* Dimensione della data */
-  margin-bottom: 10px; /* Distanza tra data e ora */
+.clock-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2rem;
+    padding: 2rem;
 }
 
-.wrapper #realTime {
-  margin: 0;
-  font-size: 3rem; /* Dimensione dell'ora */
+.clock-face {
+    position: relative;
+    padding: 40px;
+    border: 10px solid var(--text-color);
+    border-radius: 30%;
+    width: 400px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
 }
+
+#realDate {
+    margin: 0;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+    color: var(--accent-color);
+    text-shadow: 0 0 10px rgba(74, 144, 226, 0.3);
+    line-height: 1.2;
+}
+
+#realTime {
+    margin: 0;
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+    line-height: 1.2;
+    text-align: center;
+}
+
+.timezone {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--accent-color);
+    margin-top: 0.5rem;
+    letter-spacing: 1px;
+}
+
+.format-selector {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: 1rem;
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.format-selector h3 {
+    color: var(--accent-color);
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.format-selector h3:first-child {
+    margin-top: 0;
+}
+
+.format-option {
+    display: flex;
+    align-items: flex-start;
+    margin: 0.2rem 0;
+}
+
+.format-selector label {
+    display: inline-block;
+    cursor: pointer;
+    font-size: 0.9rem;
+    line-height: 1.3;
+    flex: 1;
+    text-align: left;
+    padding-right: 0.5rem;
+}
+
+.format-selector input[type="radio"] {
+    margin: 0.2rem 0.5rem 0 0;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+    .clock-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .clock-face {
+        width: 320px;
+        height: 320px;
+        padding: 25px;
+    }
+
+    #realDate {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    #realTime {
+        font-size: 2.5rem;
+    }
+
+    .timezone {
+        font-size: 1.2rem;
+    }
+
+    .wrapper.title {
+        min-height: 25vh;
+        font-size: clamp(2rem, 2rem + 8vw, 7rem);
+    }
+}
+
+@media (max-width: 480px) {
+    .wrapper.title {
+        min-height: 20vh;
+        font-size: clamp(1.8rem, 1.8rem + 7vw, 6rem);
+    }
+
+    .clock-face {
+        width: 280px;
+        height: 280px;
+        padding: 20px;
+        border-width: 8px;
+    }
+
+    #realDate {
+        font-size: 1.3rem;
+        margin-bottom: 0.8rem;
+    }
+
+    #realTime {
+        font-size: 2.2rem;
+    }
+
+    .timezone {
+        font-size: 1rem;
+        margin-top: 0.3rem;
+    }
+
+    .format-selector {
+        padding: 1.2rem;
+        max-width: 280px;
+    }
+
+    .format-selector h3 {
+        font-size: 1.1rem;
+    }
+
+    .format-selector label {
+        font-size: 0.85rem;
+    }
+} 

@@ -9,36 +9,83 @@
 </head>
 
 <body>
-    <section class="wrapper">
+    <section class="wrapper title">
         <div class="top">RealTime</div>
         <div class="bottom" aria-hidden="true">RealTime</div>
     </section>
-    <section class="wrapper">
-        <p  id="realDate"></p>
-        <p id="realTime"></p>
+
+    <section class="wrapper clock-container">
+        <div class="clock-face">
+            <p id="realDate"></p>
+            <p id="realTime"></p>
+        </div>
+        
+        <form class="format-selector">
+            <h3>Solo Data</h3>
+            <div class="format-option">
+                <input type="radio" name="selectorFormat" id="dateFull" value="0" checked>
+                <label for="dateFull">Data completa</label>
+            </div>
+            <div class="format-option">
+                <input type="radio" name="selectorFormat" id="dateLong" value="1">
+                <label for="dateLong">Data lunga</label>
+            </div>
+            <div class="format-option">
+                <input type="radio" name="selectorFormat" id="dateMedium" value="2">
+                <label for="dateMedium">Data media</label>
+            </div>
+            <div class="format-option">
+                <input type="radio" name="selectorFormat" id="dateShort" value="3">
+                <label for="dateShort">Data breve</label>
+            </div>
+
+            <h3>Solo Ora</h3>
+            <div class="format-option">
+                <input type="radio" name="selectorFormat" id="timeFull" value="5">
+                <label for="timeFull">Ora con timezone (24h)</label>
+            </div>
+            <div class="format-option">
+                <input type="radio" name="selectorFormat" id="timeMedium" value="6">
+                <label for="timeMedium">Ora media (24h)</label>
+            </div>
+            <div class="format-option">
+                <input type="radio" name="selectorFormat" id="timeShort" value="7">
+                <label for="timeShort">Ora breve (24h)</label>
+            </div>
+            <div class="format-option">
+                <input type="radio" name="selectorFormat" id="time12h" value="8">
+                <label for="time12h">Ora completa (12h)</label>
+            </div>
+
+            <h3>Data e Ora</h3>
+            <div class="format-option">
+                <input type="radio" name="selectorFormat" id="dateTimeFull" value="9">
+                <label for="dateTimeFull">Formato completo</label>
+            </div>
+            <div class="format-option">
+                <input type="radio" name="selectorFormat" id="dateTimeMedium" value="10">
+                <label for="dateTimeMedium">Formato medio</label>
+            </div>
+            <div class="format-option">
+                <input type="radio" name="selectorFormat" id="dateTimeShort" value="11">
+                <label for="dateTimeShort">Formato breve</label>
+            </div>
+            <div class="format-option">
+                <input type="radio" name="selectorFormat" id="weekdayTime12h" value="12">
+                <label for="weekdayTime12h">Giorno e ora (12h)</label>
+            </div>
+            <div class="format-option">
+                <input type="radio" name="selectorFormat" id="weekdayTimeShort" value="13">
+                <label for="weekdayTimeShort">Giorno breve e ora (12h)</label>
+            </div>
+            <div class="format-option">
+                <input type="radio" name="selectorFormat" id="fullCustom" value="14">
+                <label for="fullCustom">Data completa e ora (12h)</label>
+            </div>
+        </form>
     </section>
+
+    <script src="script.js"></script>
 </body>
-<script>
-    function displayTime() {
-        let data = new Date();
-        let realTime = data.toLocaleTimeString();
-        document.getElementById('realTime').textContent = realTime;
-        if (realTime === '00:00:00') displayDate();
-    }
-
-    function displayDate() {
-        let data = new Date();
-        let realDate = data.toDateString();
-        let parts = realDate.split(" "); // ["Sat", "Dec", "14", "2024"]
-        //per tradurre in italiano fare mappe(oggetti) con {nomeEng: "nomeIta",....}
-        let formattedDate = `${parts[0]} ${parts[2]} ${parts[1]} ${parts[3]}`;
-        document.getElementById('realDate').textContent = formattedDate;
-    }
-
-    displayDate();
-    displayTime();
-    const createClock = setInterval(displayTime, 1000);
-
-</script>
 
 </html>
